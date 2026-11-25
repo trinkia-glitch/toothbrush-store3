@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PureSmile - แปรงสีฟันรักษ์โลก</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-emerald-700 text-white p-4 shadow">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">🪥 PureSmile Official</h1>
+      <a href="admin.html" class="bg-white text-emerald-800 px-3 py-1 rounded text-sm font-semibold hover:bg-emerald-100">
+        📦 ระบบหยิบของ & จ่าหน้าพัสดุ
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-emerald-600 text-white py-12 text-center px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-2">ดูแลรอยยิ้มของคุณ พร้อมใส่ใจสิ่งแวดล้อม</h2>
+    <p class="text-emerald-100">แปรงสีฟันคุณภาพสูง ขนแปรงนุ่มถนอมเหงือก มีให้เลือก 2 รุ่นยอดนิยม</p>
+  </header>
+
+  <!-- Products (2 SKUs) -->
+  <section class="max-w-5xl mx-auto py-10 px-4">
+    <h3 class="text-2xl font-bold text-center mb-8">เลือกสินค้าที่ต้องการ</h3>
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- SKU 1 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+        <img src="./images/sku1.jpg" onerror="this.src='https://placehold.co/600x400?text=SKU-01+Eco-Bamboo'" alt="Eco-Bamboo" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">SKU-01</span>
+          <h4 class="text-xl font-bold mt-2">แปรงสีฟันไม้ไผ่ขนแปรงนุ่ม (Eco-Bamboo)</h4>
+          <p class="text-gray-600 text-sm mt-1">ด้ามจับไม้ไผ่ธรรมชาติ ย่อยสลายได้ ขนแปรงนุ่มพิเศษไม่บาดเหงือก</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-emerald-700">฿90</span>
+            <button onclick="selectProduct('SKU-01', 'แปรงสีฟันไม้ไผ่ขนแปรงนุ่ม (Eco-Bamboo)', 90)" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">เลือกสั่งซื้อรุ่นนี้</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKU 2 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+        <img src="./images/sku2.jpg" onerror="this.src='https://placehold.co/600x400?text=SKU-02+Charcoal'" alt="Charcoal Deep Clean" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <span class="text-xs font-bold bg-gray-800 text-white px-2 py-1 rounded">SKU-02</span>
+          <h4 class="text-xl font-bold mt-2">แปรงสีฟันถ่านไม้ไผ่ (Charcoal Deep Clean)</h4>
+          <p class="text-gray-600 text-sm mt-1">ขนแปรงผสมผงถ่านชาร์โคล ลดกลิ่นปาก ขจัดคราบพลัคได้ล้ำลึก</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-emerald-700">฿120</span>
+            <button onclick="selectProduct('SKU-02', 'แปรงสีฟันถ่านไม้ไผ่ (Charcoal Deep Clean)', 120)" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">เลือกสั่งซื้อรุ่นนี้</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Order Form -->
+  <section id="order-section" class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-md mb-16 border border-gray-200">
+    <h3 class="text-2xl font-bold mb-6 text-center">📝 กรอกข้อมูลสั่งซื้อ</h3>
+    <form id="orderForm" class="space-y-4">
+      <div>
+        <label class="block font-semibold mb-1">เลือกรุ่นสินค้า (SKU)</label>
+        <select id="skuSelect" onchange="calculateTotal()" class="w-full border rounded-lg p-2.5 bg-gray-50">
+          <option value="SKU-01" data-name="แปรงสีฟันไม้ไผ่ขนแปรงนุ่ม (Eco-Bamboo)" data-price="90">SKU-01 : แปรงสีฟันไม้ไผ่ขนแปรงนุ่ม (90 บาท)</option>
+          <option value="SKU-02" data-name="แปรงสีฟันถ่านไม้ไผ่ (Charcoal Deep Clean)" data-price="120">SKU-02 : แปรงสีฟันถ่านไม้ไผ่ (120 บาท)</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">จำนวน (ด้าม)</label>
+        <input type="number" id="qty" value="1" min="1" onchange="calculateTotal()" required class="w-full border rounded-lg p-2.5">
+      </div>
+      <div class="bg-emerald-50 p-3 rounded-lg text-right font-bold text-lg text-emerald-800">
+        ยอดรวมทั้งสิ้น: <span id="totalDisplay">90</span> บาท
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">ชื่อ-นามสกุล ผู้รับ</label>
+        <input type="text" id="name" required placeholder="เช่น สมชาย ใจดี" class="w-full border rounded-lg p-2.5">
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">เบอร์โทรศัพท์</label>
+        <input type="tel" id="phone" required placeholder="เช่น 081-234-5678" class="w-full border rounded-lg p-2.5">
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">ที่อยู่สำหรับจัดส่ง</label>
+        <textarea id="address" rows="3" required placeholder="บ้านเลขที่ ถนน ตำบล/แขวง อำเภอ/เขต จังหวัด รหัสไปรษณีย์" class="w-full border rounded-lg p-2.5"></textarea>
+      </div>
+      <button type="submit" id="submitBtn" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg hover:bg-emerald-700 transition">
+        ยืนยันการสั่งซื้อ
+      </button>
+    </form>
+  </section>
+
+  <script>
+    // วาง Web App URL จาก Google Apps Script ตรงนี้
+    const SCRIPT_URL = "ใส่_WEB_APP_URL_ของคุณที่นี่";
+
+    function selectProduct(sku, name, price) {
+      document.getElementById('skuSelect').value = sku;
+      calculateTotal();
+      document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function calculateTotal() {
+      const select = document.getElementById('skuSelect');
+      const price = parseInt(select.options[select.selectedIndex].getAttribute('data-price'));
+      const qty = parseInt(document.getElementById('qty').value) || 1;
+      document.getElementById('totalDisplay').innerText = price * qty;
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerText = "กำลังบันทึกคำสั่งซื้อ...";
+
+      const select = document.getElementById('skuSelect');
+      const payload = {
+        sku: select.value,
+        productName: select.options[select.selectedIndex].getAttribute('data-name'),
+        qty: parseInt(document.getElementById('qty').value),
+        totalPrice: parseInt(document.getElementById('totalDisplay').innerText),
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("สั่งซื้อสำเร็จ! รหัสคำสั่งซื้อของคุณคือ: " + data.orderId);
+        document.getElementById('orderForm').reset();
+        calculateTotal();
+      })
+      .catch(err => {
+        alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+        console.error(err);
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerText = "ยืนยันการสั่งซื้อ";
+      });
+    });
+  </script>
+</body>
+</html>
